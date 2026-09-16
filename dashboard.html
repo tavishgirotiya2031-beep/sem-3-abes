@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Management System</title>
     
-    
     <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
 
@@ -122,7 +121,6 @@
                     <h2>Student Management System</h2>
                     <p>Total Students: <strong>{students.length}</strong></p>
 
-                    {/* Add Student Form */}
                     <div className="form-section">
                         <h3>Add New Student</h3>
                         <form onSubmit={addStudent}>
@@ -142,7 +140,6 @@
                         </form>
                     </div>
 
-                    {/* Search and Filter Section */}
                     <div className="filter-section">
                         <h3>Search & Filter</h3>
                         <input 
@@ -160,7 +157,6 @@
                         </select>
                     </div>
 
-                    {/* Student List Table */}
                     <h3>Student List</h3>
                     <table>
                         <thead>
@@ -183,7 +179,6 @@
                         </tbody>
                     </table>
 
-                    {/* Display No Record Found when appropriate */}
                     {filteredStudents.length === 0 && (
                         <div className="no-record">
                             No record found
@@ -192,8 +187,6 @@
                 </div>
             );
         }
-
-        // Render the app
         const root = ReactDOM.createRoot(document.getElementById('root'));
         root.render(<App />);
     </script>
