@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System (Static)</title>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-section, .filter-section {
+            background: #eee;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        input, select, button {
+            padding: 5px;
+            margin: 5px 5px 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .no-record {
+            text-align: center;
+            padding: 20px;
+            color: red;
+            font-weight: bold;
+            border: 1px solid #aaa;
+            border-top: none;
+            /* Set display to block to see this message, and hide the table rows */
+            display: none; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>Student Management System</h2>
+        
+        <p>Total Students: <strong>2</strong></p>
+
+
+        <div class="form-section">
+            <h3>Add New Student</h3>
+            <form action="#">
+                <input type="text" placeholder="Student Name" required>
+                <select>
+                    <option value="Computer Science">Computer Science</option>
+                    <option value="Mechanical">Mechanical</option>
+                    <option value="Civil">Civil</option>
+                    <option value="Electrical">Electrical</option>
+                </select>
+                <button type="submit">Add Student</button>
+            </form>
+        </div>
+
+    
+        <div class="filter-section">
+            <h3>Search & Filter</h3>
+            <input type="text" placeholder="Search by name...">
+            <select>
+                <option value="All">All Branches</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Civil">Civil</option>
+                <option value="Electrical">Electrical</option>
+            </select>
+        </div>
+
+
+        <h3>Student List</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Branch</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Hardcoded dummy data -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>Computer Science</td>
+                    <td>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Jane Smith</td>
+                    <td>Mechanical</td>
+                    <td>
+                        <button class="delete-btn">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        
+        <div class="no-record">
+            No record found
+        </div>
+    </div>
+
+</body>
+</html>

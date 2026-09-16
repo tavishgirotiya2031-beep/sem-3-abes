@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management System</title>
+    
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+        .form-section, .filter-section {
+            background: #eee;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+        }
+        input, select, button {
+            padding: 5px;
+            margin: 5px 5px 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            border: 1px solid #aaa;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ddd;
+        }
+        .delete-btn {
+            background-color: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 5px 10px;
+        }
+        .no-record {
+            text-align: center;
+            padding: 20px;
+            color: red;
+            font-weight: bold;
+            border: 1px solid #aaa;
+            border-top: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState } = React;
+
+        function App() {
+    
+            const [students, setStudents] = useState([
+                { id: 1, name: "John Doe", branch: "Computer Science" },
+                { id: 2, name: "Jane Smith", branch: "Mechanical" }
+            ]);
+
+            
+            const [newName, setNewName] = useState("");
+            const [newBranch, setNewBranch] = useState("Computer Science");
+
+        
+            const [searchName, setSearchName] = useState("");
+            const [filterBranch, setFilterBranch] = useState("All");
+
+            
+            const addStudent = (e) => {
+                e.preventDefault();
+                if (newName.trim() === "") {
+                    alert("Please enter a name");
+                    return;
+                }
+                
+                const newStudent = {
+                    id: Date.now(), 
+                    name: newName,
+                    branch: newBranch
+                };
+                
+                setStudents([...students, newStudent]);
+                setNewName(""); 
+            };
+
+            
+            const deleteStudent = (id) => {
+                const updatedList = students.filter(student => student.id !== id);
+                setStudents(updatedList);
+            };
+
+            
+            const filteredStudents = students.filter(student => {
+                const matchesName = student.name.toLowerCase().includes(searchName.toLowerCase());
+                const matchesBranch = filterBranch === "All" || student.branch === filterBranch;
+                return matchesName && matchesBranch;
+            });
+
+            return (
+                <div className="container">
+                    <h2>Student Management System</h2>
+                    <p>Total Students: <strong>{students.length}</strong></p>
+
+                    {/* Add Student Form */}
+                    <div className="form-section">
+                        <h3>Add New Student</h3>
+                        <form onSubmit={addStudent}>
+                            <input 
+                                type="text" 
+                                placeholder="Student Name" 
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}
+                            />
+                            <select value={newBranch} onChange={(e) => setNewBranch(e.target.value)}>
+                                <option value="Computer Science">Computer Science</option>
+                                <option value="Mechanical">Mechanical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Electrical">Electrical</option>
+                            </select>
+                            <button type="submit">Add Student</button>
+                        </form>
+                    </div>
+
+                    {/* Search and Filter Section */}
+                    <div className="filter-section">
+                        <h3>Search & Filter</h3>
+                        <input 
+                            type="text" 
+                            placeholder="Search by name..." 
+                            value={searchName}
+                            onChange={(e) => setSearchName(e.target.value)}
+                        />
+                        <select value={filterBranch} onChange={(e) => setFilterBranch(e.target.value)}>
+                            <option value="All">All Branches</option>
+                            <option value="Computer Science">Computer Science</option>
+                            <option value="Mechanical">Mechanical</option>
+                            <option value="Civil">Civil</option>
+                            <option value="Electrical">Electrical</option>
+                        </select>
+                    </div>
+
+                    {/* Student List Table */}
+                    <h3>Student List</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Branch</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {filteredStudents.map(student => (
+                                <tr key={student.id}>
+                                    <td>{student.name}</td>
+                                    <td>{student.branch}</td>
+                                    <td>
+                                        <button className="delete-btn" onClick={() => deleteStudent(student.id)}>Delete</button>
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    {/* Display No Record Found when appropriate */}
+                    {filteredStudents.length === 0 && (
+                        <div className="no-record">
+                            No record found
+                        </div>
+                    )}
+                </div>
+            );
+        }
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
