@@ -2,25 +2,21 @@ const fs = require('fs').promises;
 
 async function manageFile() {
   try {
-    // 1. Pehle file create aur write karein
-    await fs.writeFile("sribendu.txt", "hello students");
+    await fs.writeFile("tavish.txt", "hello students");
     console.log("1. File created and data written successfully");
 
-    // 2. Fir file ke aage naya data append karein
-    await fs.appendFile("sribendu.txt", "\nSemester: 3");
+    await fs.appendFile("tavish.txt", "\nSemester: 3");
     console.log("2. Data appended successfully");
 
-    // 3. File content read karein
-    const data = await fs.readFile("sribendu.txt", "utf-8");
+    const data = await fs.readFile("tavish.txt", "utf-8");
     console.log("3. File Content:\n" + data);
   async function renameFile() {
   try {
-    // sribendu.txt ka naam badal kar hello.txt karein
-    await fs.rename("sribendu.txt", "hello.txt");
+    await fs.rename("tavish.txt", "hello.txt");
     console.log("File renamed successfully from sribendu.txt to hello.txt");
   } catch (error) {
     if (error.code === 'ENOENT') {
-      console.log("Error: sribendu.txt file nahi mili!");
+      console.log("Error: tavish.txt file nahi mili!");
     } else {
       console.log("Rename error:", error.message);
     }
