@@ -1,34 +1,29 @@
-// const fs = require('fs');
+const fs = require('fs');
+fs.writeFileSync('tavish.txt', 'Hello my name is tavish', 'utf-8');
+const initialContent = fs.readFileSync('tavish.txt', 'utf-8');
+console.log('File is written successfully');
 
-// // --- SYNCHRONOUS OPERATIONS ---
-// // 1. Initial write
-// fs.writeFileSync('sribendu.txt', 'Hello my name is sribendu', 'utf-8');
-// const initialContent = fs.readFileSync('sribendu.txt', 'utf-8');
-// console.log('File is written successfully');
-
-// fs.appendFileSync('sribendu.txt', ' and I am learning Node.js', 'utf-8');
-// const updatedContent = fs.readFileSync('sribendu.txt', 'utf-8');
-// console.log('3. UPDATE:', updatedContent);
+fs.appendFileSync('tavish.txt', ' and I am learning Node.js', 'utf-8');
+const updatedContent = fs.readFileSync('tavish.txt', 'utf-8');
+console.log('3. UPDATE:', updatedContent);
 
 
-// console.log('Initial read was:', initialContent);
+console.log('Initial read was:', initialContent);
 
-// if (fs.existsSync('sribendu.txt')) {
-//   console.log('file exist');
-// } else {
-//   console.log('file not');
-// }
+if (fs.existsSync('tavish.txt')) {
+  console.log('file exist');
+} else {
+  console.log('file not');
+}
 
-// --- ASYNCHRONOUS OPERATIONS ---
-// Overwrite and read asynchronously in sequence
-fs.writeFile('sribendu.txt', 'welcome to the full stack development', (err) => {
+fs.writeFile('tavish.txt', 'welcome to the full stack development', (err) => {
   if (err) {
     console.log('error creating file', err);
     return;
   }
   console.log('file created successfully');
 
-  fs.readFile('sribendu.txt', 'utf-8', (err, data) => {
+  fs.readFile('tavish.txt', 'utf-8', (err, data) => {
     if (err) {
       console.log('error reading file', err);
       return;
